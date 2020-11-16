@@ -5,7 +5,6 @@ if (not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unveri
 
 import requests,csv
 import pandas as pd
-import numpy as np
 from bs4 import BeautifulSoup
 
 
@@ -14,6 +13,7 @@ counts = [0,25]
 
 player_data = []
 names = []
+position = []
 byes = []
 projected = []
 for count in counts:
@@ -28,6 +28,12 @@ for count in counts:
             for player in row.find_all('a',{"class" : "Nowrap name F-link"}):
                 name = player.text
                 names.append(name)
+            for pos in row.find_all('span',{"class" : "Fz-xxs"}):
+                ppos = pos.text
+                a = ppos[-2:]
+                a.replace(' ','')
+                if len(a) == 2:
+                    position.append(a)
             for byeWeek in row.find_all('td',{"class" : "Alt Ta-c"}):
                 bye = byeWeek.text
                 byes.append(bye)
@@ -35,9 +41,10 @@ for count in counts:
                 projectedPoints = fanPoints.text
                 projected.append(projectedPoints)
     except: pass
-
-d = {'name':names,'bye':byes,'projected':projected}
+print(len(names))
+d = {'name':names,'position':position,'bye':byes,'projected':projected}
 df = pd.DataFrame(data=d)
+#print(df)
 
 #exporting to csv
 df.to_csv('yahooSeasonProj.csv',index=True)
