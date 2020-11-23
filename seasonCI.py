@@ -32,13 +32,14 @@ for row in data:
         lls.append(lower_limit)
         uls.append(upper_limit)
         means.append(mean)
-xlls = lls[:10]
-xuls = uls[:10]
-xmeans = means[:10]
-xnames = names[:10]
+xlls = lls[:30]
+xuls = uls[:30]
+xmeans = means[:30]
+xnames = names[:30]
 combined_errors = [xlls, xuls]
 
-plt.errorbar(xnames,xmeans,yerr=combined_errors, fmt='o')
-plt.title('Projection Spread: ' + position)
-#plt.set_yscale('log')
+#plt.errorbar(xnames,xmeans,yerr=combined_errors, fmt='o')
+plt.errorbar(xmeans,xnames,xerr=combined_errors, fmt='o')
+plt.title('2020 Projection Spread: ' + position + ' (Top 30)')
+
 plt.show()
