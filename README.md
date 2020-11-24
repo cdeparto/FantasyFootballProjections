@@ -1,13 +1,13 @@
 # CONTENTS OF THIS FILE
 ---------------------
 
--Introduction
--Packages Used
--Description
-    -Web scraping
-    -Data
-    -Confidence Interval
-    -Results
+- Introduction
+- Packages Used
+- Description
+    - Web scraping
+    - Data
+    - Confidence Interval
+    - Results
 
 ## INTRODUCTION
 ------------
@@ -15,10 +15,10 @@ This project provides NFL Fantasy football projections for the amount of points 
 
 ## PACKAGES USED
 -------------
--BeautifulSoup
--pandas
--matplotlib
--statistics
+- BeautifulSoup
+- pandas
+- matplotlib
+- statistics
 
 ## DESCRIPTION
 -----------
@@ -27,10 +27,27 @@ This project provides NFL Fantasy football projections for the amount of points 
 Sources are gathered from various different sites that provide player projections. All of the data was gathered through FFToday which is a site that collected various sourced into multiple tables. The data used for the project was scraped from these tables. [FFToday](https://www.fftoday.com/)
 
 The sources of player projections:
-    -ESPN
-    -CBS
-    -NFL
-    -YAHOO
+    - ESPN
+    - CBS
+    - NFL
+    - YAHOO
+
+Example of scraping:
+```
+url_qb = 'https://www.fftoday.com/rankings/playerproj.php?Season=2020&PosID=10&LeagueID=143908&order_by=FFPts&sort_order=DESC&cur_page={}'
+pages = [0,1]
+results = []
+for page in pages:
+    html = url_qb.format(page)
+    dfs = pd.read_html(html)
+    players_table = dfs[7]
+    players_data = players_table[[1,2,3,12]][2:]
+    players_data[13] = "QB"
+    results.append(players_data)
+    players_data.columns = ['name','team','bye','NFLprojected','pos']
+```
+Scraping had to be done seperately for each position due to the different amount of columns in each table. Then this was repeade for each source.
+
 
 ### Data
 Each web page source is stored in seperate csv files and then combined into a single csv file called COMBINEDseason.csv
@@ -39,6 +56,7 @@ Each web page source is stored in seperate csv files and then combined into a si
 Due to  because no single source will constantly be better than every other source, by combining all of the various sources we can get a more accurate calculation of player projections. This is done through creating a confidence interval for each player, consisting of a; mean, upper limit, and lower limit. Having a single number is useful; however, you can make better decision making through having a range of points a player could fall in. An example would be if one player has a higher average amount of points and another player has a lower average but a higher limit. This would increase in risk, but a fantasy manager may want/have to take that risk.
 
 The confidence Interval formula:
+
 ![CI](images/CI_ss.png)
 
 
@@ -82,4 +100,5 @@ combined_errors = [xlls, xuls]
 Once the confidence interval is calculated, the top 30 results are then graphed onto a bar chart where the mean is marked and the upper and lower limits are shown as error bars.
 
 An example of the results chart:
+
 ![demo results](images/demoQB.png)
