@@ -34,7 +34,7 @@ Each web page source is stored in seperate csv files and then combined into a si
 Due to  because no single source will constantly be better than every other source, by combining all of the various sources we can get a more accurate calculation of player projections. This is done through creating a confidence interval for each player, consisting of a; mean, upper limit, and lower limit. Having a single number is useful; however, you can make better decision making through having a range of points a player could fall in. An example would be if one player has a higher average amount of points and another player has a lower average but a higher limit. This would increase in risk, but a fantasy manager may want/have to take that risk.
 
 The confidence Interval formula:
-![CI](/images/CL_ss.png)
+![CI](https://github.com/[cdeparto]/[IA626_FinalProject]/blob/[images]/CL_ss.pgn?raw=true)
 
 
 The following is the code to calculate the confidence interval:
@@ -77,4 +77,5 @@ combined_errors = [xlls, xuls]
 Once the confidence interval is calculated, the top 30 results are then graphed onto a bar chart where the mean is marked and the upper and lower limits are shown as error bars.
 
 An example of the results chart:
-![demo results](/images/demoQB.png)
+![demo results]
+(/images/demoQB.png)
