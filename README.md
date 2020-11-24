@@ -1,8 +1,13 @@
-##CONTENTS OF THIS FILE
+#CONTENTS OF THIS FILE
 ---------------------
 
-*Introduction
-
+-Introduction
+-Packages Used
+-Description
+    -Web scraping
+    -Data
+    -Confidence Interval
+    -Results
 
 ##INTRODUCTION
 ------------
@@ -10,31 +15,31 @@ This project provides NFL Fantasy football projections for the amount of points 
 
 ##PACKAGES USED
 -------------
-*BeautifulSoup
-*pandas
-*matplotlib
-*statistics
+-BeautifulSoup
+-pandas
+-matplotlib
+-statistics
 
 ##DESCRIPTION
 -----------
 
-####Web Scraping (Sources)
+###Web Scraping (Sources)
 Sources are gathered from various different sites that provide player projections. All of the data was gathered through FFToday which is a site that collected various sourced into multiple tables. The data used for the project was scraped from these tables. [FFToday](https://www.fftoday.com/)
 
 The sources of player projections:
-    *ESPN
-    *CBS
-    *NFL
-    *YAHOO
+    -ESPN
+    -CBS
+    -NFL
+    -YAHOO
 
-####Data
+###Data
 Each web page source is stored in seperate csv files and then combined into a single csv file called COMBINEDseason.csv
 
-####Confidence Interval
+###Confidence Interval
 Due to  because no single source will constantly be better than every other source, by combining all of the various sources we can get a more accurate calculation of player projections. This is done through creating a confidence interval for each player, consisting of a; mean, upper limit, and lower limit. Having a single number is useful; however, you can make better decision making through having a range of points a player could fall in. An example would be if one player has a higher average amount of points and another player has a lower average but a higher limit. This would increase in risk, but a fantasy manager may want/have to take that risk.
 
 The confidence Interval formula:
-![CI](https://github.com/cdeparto/IA626_FinalProject/blob/images/CI_ss.png?raw=true)
+![CI](images/CI_ss.png)
 
 
 The following is the code to calculate the confidence interval:
@@ -73,9 +78,8 @@ xnames = names[:30]
 combined_errors = [xlls, xuls]
 ```
 
-####Bar Chart
+###Results (Bar Chart)
 Once the confidence interval is calculated, the top 30 results are then graphed onto a bar chart where the mean is marked and the upper and lower limits are shown as error bars.
 
 An example of the results chart:
-![demo results]
-(/images/demoQB.png)
+![demo results](images/demoQB.png)
