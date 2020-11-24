@@ -20,8 +20,11 @@ for row in data:
         name = row['name']
         names.append(name)
         set = [float(row['CBSprojected']) ,float(row['NFLprojected']) , float(row['YAHOOprojected']),float(row['ESPNprojected'])]
+
+        #cacluate mean
         mean = (float(row['CBSprojected']) + float(row['NFLprojected']) + float(row['YAHOOprojected']) + float(row['ESPNprojected'])) / 4
-        #always 4 sourcess
+
+        #always 4 sources
         n = 4
         z_score = 0.674
         standard_deviation = statistics.stdev(set)
